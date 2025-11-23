@@ -23,6 +23,7 @@ public class FibonacciSearch {
         int fm1=1;
         int fm=fm1+fm2;
 
+        // find smallest Fibonacci number >= n
         while(fm<n){
             fm2=fm1;
             fm1=fm;
@@ -37,23 +38,27 @@ public class FibonacciSearch {
             else
                 i=n-1;
 
+            // if value is smaller, move right
             if(arr[i]<key){
                 fm=fm1;
                 fm1=fm2;
                 fm2=fm-fm1;
                 offset=i;
             }
+            // if value is greater, move left
             else if(arr[i]>key){
                 fm=fm2;
                 fm1=fm1-fm2;
                 fm2=fm-fm1;
             }
-            else 
+            // value found
+            else
                 return i;
         }
+        // check last possible position
         if (fm1==1 && arr[offset+1]==key)
             return offset +1;
-        return -1;
+        return -1;  // not found
     }
 
     /**
@@ -67,12 +72,23 @@ public class FibonacciSearch {
             System.out.print(arr[i]+" ");
         }
         n = arr.length;
+
+        // Test with element in array
         key = 10;
-        System.out.print("\nThe element to be searched: " + key);
+        System.out.println("\nThe element to be searched: " + key);
         int index = fibonacci_search(arr, n, key);
         if(index >= 0)
-            System.out.print("\nFound at index " + index);
+            System.out.println("Found at index " + index);
         else
-            System.out.print("\nUnsuccessful search");
+            System.out.println("Not found");
+
+        // Test with element not in array
+        key = 20;
+        System.out.println("The element to be searched: " + key);
+        index = fibonacci_search(arr, n, key);
+        if(index >= 0)
+            System.out.println("Found at index " + index);
+        else
+            System.out.println("Not found");
     }
 }
